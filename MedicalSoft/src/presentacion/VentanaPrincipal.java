@@ -44,13 +44,14 @@ public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private Paciente pacientes[]= new Paciente[2];
-	private BufferedImage image;
+	private BufferedImage image, icon;
 	private JList<Paciente> list;
 	private JTextField textApellidos;
 	private JTextField textNombre;
 	private JTextPane textPaneId;
 	private JTextPane textPaneEdad;
 	private JTextField textSexo;
+
 
 	public VentanaPrincipal() {
 		setTitle("Ventana Principal");

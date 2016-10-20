@@ -167,7 +167,7 @@ public class Login extends JFrame {
 		contentPane.add(btnAceptar, gbc_btnAceptar);
 		
 		try {
-			doctor=ImageIO.read( new File( "C:/Users/Fran/workspace/yo.png" ) );
+			doctor=ImageIO.read( new File( "/resources/doctor.png" ) );
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
