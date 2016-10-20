@@ -39,28 +39,30 @@ import java.awt.Font;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.JPasswordField;
+import javax.swing.border.SoftBevelBorder;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private Bienvenida panel1;
 	private JTextField textUsuario;
-	private JTextField textContraseña;
 	private BufferedImage image,doctor; 
 	Doctor usuarios[]= new Doctor[2]; 
+	private JPasswordField textContraseña;
 
 	public Login() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/resources/hospital.png")));
 		setTitle("Login");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 568, 279);
+		setBounds(100, 100, 512, 279);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.text);
 		contentPane.setBorder(new MatteBorder(1, 1, 3, 3, (Color) Color.DARK_GRAY));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{41, 164, 100, 100, 92, 0};
+		gbl_contentPane.columnWidths = new int[]{23, 164, 100, 100, 92, 0};
 		gbl_contentPane.rowHeights = new int[]{41, 60, 60, 43, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
@@ -92,9 +94,9 @@ public class Login extends JFrame {
 		contentPane.add(lblUsuario, gbc_lblUsuario);
 		
 		textUsuario = new JTextField();
+		textUsuario.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		GridBagConstraints gbc_textUsuario = new GridBagConstraints();
-		gbc_textUsuario.gridwidth = 2;
-		gbc_textUsuario.insets = new Insets(0, 0, 5, 0);
+		gbc_textUsuario.insets = new Insets(0, 0, 5, 5);
 		gbc_textUsuario.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textUsuario.gridx = 3;
 		gbc_textUsuario.gridy = 1;
@@ -110,16 +112,15 @@ public class Login extends JFrame {
 		gbc_lblContrasea.gridy = 2;
 		contentPane.add(lblContrasea, gbc_lblContrasea);
 		
-		textContraseña = new JTextField();
-		textContraseña.setText("");
+		textContraseña = new JPasswordField();
+		textContraseña.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		textContraseña.addActionListener(new TextContraseñaActionListener());
 		GridBagConstraints gbc_textContraseña = new GridBagConstraints();
-		gbc_textContraseña.gridwidth = 2;
-		gbc_textContraseña.insets = new Insets(0, 0, 5, 0);
+		gbc_textContraseña.insets = new Insets(0, 0, 5, 5);
 		gbc_textContraseña.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textContraseña.gridx = 3;
 		gbc_textContraseña.gridy = 2;
 		contentPane.add(textContraseña, gbc_textContraseña);
-		textContraseña.setColumns(10);
 		
 		JButton btnRegistrar = new JButton("Registrar");
 		btnRegistrar.setToolTipText("Pincha aqu\u00ED para crear un nuevo usuario.");
@@ -177,9 +178,18 @@ public class Login extends JFrame {
 	
 	public Doctor esDoctor(){
 		Doctor doctor=null;
-			for(int i=0;i<1;i++){
+			for(int i=0;i<usuarios.length;i++){
 				if(usuarios[i].getUsuario().equals(textUsuario.getText())&&(usuarios[i].getContraseña().equals(textContraseña.getText()))){
 					return usuarios[i];
+				}
+			}
+		return doctor;
+	}
+	public boolean isDoctor(){
+		boolean doctor=false;
+			for(int i=0;i<usuarios.length;i++){
+				if(usuarios[i].getUsuario().equals(textUsuario.getText())&&(usuarios[i].getContraseña().equals(textContraseña.getText()))){
+					doctor=true;
 				}
 			}
 		return doctor;
@@ -192,8 +202,8 @@ public class Login extends JFrame {
 	private class BtnAceptarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			Doctor doctor=esDoctor();
-			panel1 = new Bienvenida(doctor);
 			if(doctor!=null){
+				panel1 = new Bienvenida(doctor);
 				panel1.setVisible(true);
 				dispose();
 			}else{
@@ -210,6 +220,17 @@ public class Login extends JFrame {
 	private class BtnCerraActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			dispose();
+		}
+	}
+	private class TextContraseñaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			if(isDoctor()){
+				Doctor doctor=esDoctor();
+				panel1 = new Bienvenida(doctor);
+				panel1.setVisible(true);
+				dispose();
+			}
+				
 		}
 	}
 }

@@ -9,11 +9,11 @@ import javax.imageio.ImageIO;
 public class Paciente {
 	private String nombre, apellidos,nacionalidad,direccion,municipio,alergias,medicación;
 	private int id,dni,edad,cp;
-	private char sexo;
+	private String sexo;
 	BufferedImage image;
 	
-	public Paciente(String nombre, String apellidos, String nacionalidad, String direccion, String municipio,String alergias, String medicación,
-			int id, int dni, int edad, int cp, char sexo,BufferedImage image) {
+	public Paciente(int id,String nombre, String apellidos, String nacionalidad, String direccion, String municipio, int cp,String alergias, String medicación,
+			int dni, int fechaNacimiento, String sexo,BufferedImage image) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -24,7 +24,7 @@ public class Paciente {
 		this.medicación = medicación;
 		this.id = id;
 		this.dni = dni;
-		this.edad = edad;
+		this.edad = fechaNacimiento;
 		this.cp = cp;
 		this.sexo = sexo;
 		try {
@@ -95,10 +95,10 @@ public class Paciente {
 	public void setCp(int cp) {
 		this.cp = cp;
 	}
-	public char getSexo() {
+	public String getSexo() {
 		return sexo;
 	}
-	public void setSexo(char sexo) {
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
 

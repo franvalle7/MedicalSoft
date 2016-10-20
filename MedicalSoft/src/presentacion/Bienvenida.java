@@ -67,6 +67,7 @@ public class Bienvenida extends JFrame {
 		contentPane.add(btnSalir, gbc_btnSalir);
 		
 		JButton btnContinuar = new JButton("Continuar");
+		btnContinuar.addActionListener(new BtnContinuarActionListener());
 		GridBagConstraints gbc_btnContinuar = new GridBagConstraints();
 		gbc_btnContinuar.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnContinuar.gridx = 3;
@@ -79,6 +80,13 @@ public class Bienvenida extends JFrame {
 
 	private class BtnSalirActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			dispose();
+		}
+	}
+	private class BtnContinuarActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			VentanaPrincipal panel =new VentanaPrincipal();
+			panel.setVisible(true);
 			dispose();
 		}
 	}
