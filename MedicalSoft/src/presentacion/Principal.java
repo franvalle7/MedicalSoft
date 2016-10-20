@@ -17,6 +17,8 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.JList;
 import dominio.Paciente;
+
+
 import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
@@ -26,6 +28,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import javax.swing.ButtonGroup;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Principal extends JFrame {
 
@@ -33,11 +42,13 @@ public class Principal extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JPanel panelCardLayout;
+	private JButton btnPacientes;
 
 	public Principal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/resources/hospital.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 862, 568);
+		setBounds(100, 100, 885, 568);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -60,12 +71,90 @@ public class Principal extends JFrame {
 		gbc_btnAtras.gridy = 0;
 		panelBotones.add(btnAtras, gbc_btnAtras);
 		
-		JPanel panelCardLayout = new JPanel();
+		panelCardLayout = new JPanel();
 		contentPane.add(panelCardLayout, BorderLayout.CENTER);
 		panelCardLayout.setLayout(new CardLayout(0, 0));
 		
 		JPanel panelInicio = new JPanel();
 		panelCardLayout.add(panelInicio, "panelInicio");
+		GridBagLayout gbl_panelInicio = new GridBagLayout();
+		gbl_panelInicio.columnWidths = new int[]{170, 0, 669, 0, 0};
+		gbl_panelInicio.rowHeights = new int[]{49, 0, 0, 0, 0, 304, 0};
+		gbl_panelInicio.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelInicio.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
+		panelInicio.setLayout(gbl_panelInicio);
+		
+		JPanel panelIcono = new JPanel();
+		GridBagConstraints gbc_panelIcono = new GridBagConstraints();
+		gbc_panelIcono.gridheight = 5;
+		gbc_panelIcono.insets = new Insets(0, 0, 5, 5);
+		gbc_panelIcono.fill = GridBagConstraints.BOTH;
+		gbc_panelIcono.gridx = 0;
+		gbc_panelIcono.gridy = 0;
+		panelInicio.add(panelIcono, gbc_panelIcono);
+		
+		JLabel label_5 = new JLabel("");
+		label_5.setIcon(new ImageIcon(Principal.class.getResource("/resources/doctor.png")));
+		panelIcono.add(label_5);
+		
+		JLabel lblPanelPrincipal = new JLabel("Panel Principal");
+		lblPanelPrincipal.setFont(new Font("Verdana", Font.BOLD, 18));
+		GridBagConstraints gbc_lblPanelPrincipal = new GridBagConstraints();
+		gbc_lblPanelPrincipal.anchor = GridBagConstraints.WEST;
+		gbc_lblPanelPrincipal.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPanelPrincipal.gridx = 2;
+		gbc_lblPanelPrincipal.gridy = 0;
+		panelInicio.add(lblPanelPrincipal, gbc_lblPanelPrincipal);
+		
+		JLabel lblNewLabel = new JLabel("Funciones de Uso Frecuente");
+		lblNewLabel.setFont(new Font("Verdana", Font.BOLD, 14));
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 2;
+		gbc_lblNewLabel.gridy = 4;
+		panelInicio.add(lblNewLabel, gbc_lblNewLabel);
+		
+		JPanel panelColumna = new JPanel();
+		GridBagConstraints gbc_panelColumna = new GridBagConstraints();
+		gbc_panelColumna.insets = new Insets(0, 0, 0, 5);
+		gbc_panelColumna.fill = GridBagConstraints.BOTH;
+		gbc_panelColumna.gridx = 0;
+		gbc_panelColumna.gridy = 5;
+		panelInicio.add(panelColumna, gbc_panelColumna);
+		panelColumna.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JPanel panelControles = new JPanel();
+		panelControles.setBackground(UIManager.getColor("Button.highlight"));
+		panelControles.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Acciones", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLUE));
+		GridBagConstraints gbc_panelControles = new GridBagConstraints();
+		gbc_panelControles.insets = new Insets(0, 0, 0, 5);
+		gbc_panelControles.fill = GridBagConstraints.BOTH;
+		gbc_panelControles.gridx = 2;
+		gbc_panelControles.gridy = 5;
+		panelInicio.add(panelControles, gbc_panelControles);
+		panelControles.setLayout(new GridLayout(2, 3, 30, 30));
+		
+		btnPacientes = new JButton("Gestión de Pacientes");
+		btnPacientes.addActionListener(new BtnPanelActionListener());
+		panelControles.add(btnPacientes);
+		JButton btnNewButton_1 = new JButton("Gestión de Consultas");
+		panelControles.add(btnNewButton_1);
+		
+		JButton button_1 = new JButton("New button");
+		panelControles.add(button_1);
+		
+		JButton btnNewButton_3 = new JButton("New button");
+		panelControles.add(btnNewButton_3);
+		
+		/*Boton btnNewButton_3 = new Boton("Puta ahí",Color.BLUE, Color.RED,30,30);
+		panelControles.add(btnNewButton_3);*/
+		
+		JButton btnNewButton_2 = new JButton("New button");
+		panelControles.add(btnNewButton_2);
+		
+		JButton btnNewButton_4 = new JButton("New button");
+		panelControles.add(btnNewButton_4);
 		
 		JPanel panelEspecialistas = new JPanel();
 		panelCardLayout.add(panelEspecialistas, "panelEspecialistas");
@@ -77,12 +166,12 @@ public class Principal extends JFrame {
 		panelPacientes.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 255)));
 		panelCardLayout.add(panelPacientes, "panelPacientes");
 		
-		GridBagLayout gbl_panelPacientes = new GridBagLayout();
-		gbl_panelPacientes.columnWidths = new int[]{120, 53, 37, 42, 0, 41, 0, 80, 0, 0, 90, 0, 56, 29, 42, 25, 0, 0};
-		gbl_panelPacientes.rowHeights = new int[]{35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 40, 0};
-		gbl_panelPacientes.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_panelPacientes.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panelPacientes.setLayout(gbl_panelPacientes);
+		GridBagLayout gbl_GestióndePacientes = new GridBagLayout();
+		gbl_GestióndePacientes.columnWidths = new int[]{120, 53, 37, 42, 0, 41, 0, 80, 0, 0, 90, 0, 56, 29, 42, 25, 0, 0};
+		gbl_GestióndePacientes.rowHeights = new int[]{35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 40, 0};
+		gbl_GestióndePacientes.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_GestióndePacientes.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panelPacientes.setLayout(gbl_GestióndePacientes);
 		
 		JList<Paciente> list = new JList<Paciente>();
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -219,4 +308,13 @@ public class Principal extends JFrame {
 		mnAyuda.add(mntmAcerca);
 	}
 
+		
+	
+	private class BtnPanelActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			CardLayout cl = (CardLayout)(panelCardLayout.getLayout());
+			cl.show(panelCardLayout, "panelPacientes");
+
+		}
+	}
 }

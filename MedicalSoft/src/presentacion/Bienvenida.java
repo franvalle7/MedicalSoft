@@ -89,8 +89,10 @@ public class Bienvenida extends JFrame {
 	}
 	private class BtnContinuarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			VentanaPrincipal panel =new VentanaPrincipal();
-			panel.setVisible(true);
+			//VentanaPrincipal panel =new VentanaPrincipal();
+			//panel.setVisible(true);
+			Principal principal = new Principal();
+			principal.setVisible(true);
 			dispose();
 		}
 	}
