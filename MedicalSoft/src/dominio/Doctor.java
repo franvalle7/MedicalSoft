@@ -9,15 +9,13 @@ import javax.imageio.ImageIO;
 public class Doctor {
 	
 	private String usuario, contraseña, nombre, apellidos;
-	BufferedImage image;
 	
-	public Doctor(String usuario, String contraseña, String nombre, String apellidos,BufferedImage image) {
+	public Doctor(String usuario, String contraseña, String nombre, String apellidos) {
 		super();
 		this.usuario = usuario;
 		this.contraseña = contraseña;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
-		this.image=image;
 	}
 
 	public String getUsuario() {
@@ -52,11 +50,5 @@ public class Doctor {
 		this.apellidos = apellidos;
 	}
 
-	public BufferedImage getImage() {
-		return image;
-	}
 
-	public void setImage(BufferedImage image) {
-		this.image = image;
-	}
 }

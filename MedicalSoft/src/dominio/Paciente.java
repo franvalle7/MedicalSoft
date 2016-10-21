@@ -8,12 +8,12 @@ import javax.imageio.ImageIO;
 
 public class Paciente {
 	private String nombre, apellidos,nacionalidad,direccion,municipio,alergias,medicación;
-	private int id,dni,edad,cp;
+	private int id,dni,edad,cp,historia;
 	private String sexo;
 	BufferedImage image;
 	
 	public Paciente(int id,String nombre, String apellidos, String nacionalidad, String direccion, String municipio, int cp,String alergias, String medicación,
-			int dni, int fechaNacimiento, String sexo,BufferedImage image) {
+			int dni, int fechaNacimiento,int historia, String sexo) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -27,6 +27,7 @@ public class Paciente {
 		this.edad = fechaNacimiento;
 		this.cp = cp;
 		this.sexo = sexo;
+		this.historia=historia;
 		try {
 			image=ImageIO.read( new File( "C:/Users/Fran/workspace/yo.png" ) );
 		} catch (IOException e) {

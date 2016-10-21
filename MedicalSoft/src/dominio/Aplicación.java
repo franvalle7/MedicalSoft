@@ -1,11 +1,10 @@
 package dominio;
 
-import presentacion.Login;
-
+import presentacion.FrameLogin;
 public class Aplicación {
 
 	public static void main(String[] args) {
-		Login login=new Login();
+		FrameLogin login=new FrameLogin();
 		login.setVisible(true);
 
 	}

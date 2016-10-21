@@ -5,7 +5,6 @@ public class Consulta {
 	private String horaCita, motivo;
 	
 	public Consulta(Paciente paciente, String horaCita, String motivo) {
-		super();
 		this.paciente = paciente;
 		this.horaCita = horaCita;
 		this.motivo = motivo;
